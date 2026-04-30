@@ -4,7 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Para mi niña hermosa</title>
-    <style>
+    <style>/* 1. Efecto de levitación para las tarjetas */
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(214, 51, 132, 0.3);
+    transition: all 0.4s ease;
+}
+
+/* 2. Fondo con degradado animado */
+body {
+    background: linear-gradient(-45deg, #ffeef2, #ffd1dc, #ffeef2, #ffc2d1);
+    background-size: 400% 400%;
+    animation: gradientBG 10s ease infinite;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* 3. Que el disco del reproductor brille mientras gira */
+.disco {
+    box-shadow: 0 0 15px rgba(214, 51, 132, 0.5);
+}
         body {
             background-color: #ffeef2;
             display: flex;
@@ -27,14 +50,25 @@
             width: 90%;
             max-width: 400px;
             border: 3px dashed #ffb3c6;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             box-sizing: border-box;
+        }
+
+        /* Estilo para la CARTA LARGA */
+        .love-letter {
+            background: #fffafa;
+            border: 1px solid #ffccd5;
+            padding: 30px 20px;
+            text-align: left;
+            line-height: 1.8;
+            font-family: 'Georgia', serif;
+            color: #444;
         }
 
         .photo-container {
             width: 100%;
-            max-width: 250px;
-            height: 250px;
+            max-width: 280px;
+            height: 280px;
             margin: 0 auto 20px;
             border-radius: 15px;
             overflow: hidden;
@@ -53,7 +87,7 @@
         h1 { font-size: 1.6rem; }
         h2 { font-size: 1.3rem; }
 
-        p { color: #555; font-size: 1rem; line-height: 1.5; min-height: 50px; }
+        p { color: #555; font-size: 1rem; line-height: 1.5; }
 
         .buttons { display: flex; gap: 10px; justify-content: center; margin-top: 15px; }
 
@@ -62,11 +96,11 @@
             background-color: #ff4d6d;
             color: white;
             border: none;
-            padding: 10px;
-            border-radius: 20px;
+            padding: 12px;
+            border-radius: 25px;
             cursor: pointer;
             font-weight: bold;
-            font-size: 0.9rem;
+            transition: 0.3s;
         }
 
         button:disabled { background-color: #ffccd5; }
@@ -78,33 +112,216 @@
             margin-top: 10px;
         }
 
-        .btn-emoji { font-size: 1.3rem; padding: 10px; background: #fff0f3; border: 1px solid #ffb3c6; }
+        .btn-emoji { 
+            font-size: 1.3rem; 
+            background: #fff0f3; 
+            border: 2px solid #ffb3c6; 
+            border-radius: 15px;
+        }
 
-        #btnMusicaContainer {
+        /* NUEVO REPRODUCTOR ESTILIZADO */
+        #reproductor-mambo {
             position: fixed;
             bottom: 20px;
             left: 20px;
             z-index: 1000;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px 15px;
+            border-radius: 50px;
             display: flex;
             align-items: center;
-            gap: 8px;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 5px 12px;
-            border-radius: 30px;
-            border: 1px solid #ffb3c6;
+            gap: 12px;
+            box-shadow: 0 8px 20px rgba(214, 51, 132, 0.2);
+            border: 2px solid #ffb3c6;
         }
-    </style>
+
+        .disco {
+            width: 35px;
+            height: 35px;
+            background: #ff4d6d;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        @keyframes girar {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .info-musica { display: flex; flex-direction: column; }
+        .info-musica span { font-size: 11px; font-weight: bold; color: #d63384; }
+        .info-musica small { font-size: 9px; color: #777; }
+
+        .hint { font-size: 0.8rem; color: #ff8fa3; margin-bottom: 10px; }
+
+        /* Muro de fotos */
+        .muro-scroll {
+            display: flex; 
+            overflow-x: auto; 
+            gap: 10px; 
+            padding-bottom: 10px;
+            scrollbar-width: none;
+        }
+        .muro-scroll img {
+            width: 150px; height: 150px; 
+            border-radius: 10px; 
+            object-fit: cover; 
+            flex: none; 
+            border: 2px solid #ffb3c6;
+        }
+    </style><style>
+    /* Importamos una fuente más bonita de Google */
+    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@300;500;700&display=swap');
+
+    body {
+        /* Fondo con degradado suave y animado */
+        background: linear-gradient(-45deg, #ffeef2, #ffd1dc, #fbc2eb, #a18cd1);
+        background-size: 400% 400%;
+        animation: gradientBG 15s ease infinite;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0;
+        padding: 40px 0;
+        font-family: 'Quicksand', sans-serif; /* Fuente moderna */
+        overflow-x: hidden;
+    }
+
+    @keyframes gradientBG {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    .card {
+        /* Efecto de Cristal (Glassmorphism) */
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        padding: 25px;
+        border-radius: 30px;
+        box-shadow: 0 15px 35px rgba(214, 51, 132, 0.2);
+        text-align: center;
+        width: 90%;
+        max-width: 400px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        margin-bottom: 30px;
+        transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+        transform: scale(1.02); /* Se agranda un pelín al tocarla */
+    }
+
+    /* Estilo para la CARTA LARGA */
+    .love-letter {
+        background: rgba(255, 250, 250, 0.9);
+        border: 2px solid #ffccd5;
+        font-family: 'Dancing Script', cursive; /* Fuente de manuscrito */
+        font-size: 1.3rem;
+        color: #5a5a5a;
+        line-height: 1.6;
+    }
+
+    .photo-container {
+        width: 100%;
+        max-width: 280px;
+        height: 280px;
+        margin: 0 auto 20px;
+        border-radius: 25px; /* Bordes más redondeados */
+        overflow: hidden;
+        border: 5px solid white;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        cursor: pointer;
+    }
+
+    h1, h2 { 
+        color: #d63384; 
+        font-family: 'Dancing Script', cursive; 
+        font-size: 2rem;
+        margin-bottom: 10px;
+    }
+
+    button {
+        background: linear-gradient(45deg, #ff4d6d, #ff758f);
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 50px;
+        cursor: pointer;
+        font-weight: 700;
+        box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4);
+        transition: 0.3s;
+    }
+
+    button:active {
+        transform: scale(0.95);
+    }
+
+    /* Diseño del reproductor más "PRO" */
+    #reproductor-mambo {
+        position: fixed;
+        bottom: 20px;
+        right: 20px; /* Movido a la derecha para que no estorbe */
+        left: auto;
+        background: white;
+        padding: 8px 15px;
+        border-radius: 50px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    .disco {
+        width: 40px;
+        height: 40px;
+        background: #ff4d6d;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.8rem;
+    }
+
+    /* Mejora del muro de fotos */
+    .muro-scroll img {
+        width: 180px;
+        height: 180px;
+        border-radius: 20px;
+        border: 4px solid white;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+</style>
 </head>
 <body>
 
-    <!-- TARJETA 1: FOTOS -->
+    <!-- REPRODUCTOR -->
+    <div id="reproductor-mambo">
+        <div id="disco-animado" class="disco" onclick="toggleMusica()">▶</div>
+        <div class="info-musica">
+            <span>Starting Over</span>
+            <small>John Lennon</small>
+        </div>
+    </div>
+
+    <audio id="miMusica" loop>
+        <source src="(Just Like) Starting Over (Ultimate Mix) - John Lennon.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- 1. ÁLBUM DE FOTOS -->
     <div class="card">
         <div class="photo-container" onclick="revelarSecreto()">
             <img id="foto" src="dcb364cda26003eb77348739a2c560d6.jpg" alt="Foto">
         </div>
-        <p id="pista" style="font-size: 0.8rem; color: #ff8fa3;">✨ Toca la foto ✨</p>
+        <p id="pista" class="hint">✨ Toca la foto ✨</p>
         <h1 id="titulo">Para mi niña hermosa</h1>
-        <p id="mensaje">Quería darte un detalle diferente, algo que pudieras guardar siempre.</p>
+        <p id="mensaje">Quería darte un detalle diferente, algo que pudieras guardar siempre...</p>
         
         <div class="buttons">
             <button id="btnAnt" onclick="cambiarCarta(-1)" disabled>Anterior</button>
@@ -112,36 +329,59 @@
         </div>
     </div>
 
-    <!-- TARJETA 2: RAZONES -->
+    <!-- .6 RAZONES -->
     <div class="card">
-        <h2>3 cosas que amo de ti...</h2>
+        <h2>6 cosas que amo de ti...</h2>
         <div class="grid-reasons">
-            <button class="btn-emoji" onclick="mostrarRazon('Tu sonrisa', 'Es lo que más me alegra el día.')">😸</button>
-            <button class="btn-emoji" onclick="mostrarRazon('Tu apoyo', 'Gracias por estar ahí siempre.')">🤝</button>
-            <button class="btn-emoji" onclick="mostrarRazon('Tu forma de ser', 'Eres única en este mundo.')">✨</button>
-            <button class="btn-emoji" onclick="mostrarRazon('Tu risa', 'Es contagiosa y me hace feliz.')">😂</button>
-            <button class="btn-emoji" onclick="mostrarRazon('Tu inteligencia', 'Admiro cómo solucionas todo.')">🧠</button>
-            <button class="btn-emoji" onclick="mostrarRazon('Tu amor', 'Es lo que más anhelo.')">💕</button>
+            <button class="btn-emoji" onclick="mostrarRazon('Tu sonrisa', 'Es lo que más me alegraba el dia, extraño tus ojos tambien.')">😸</button>
+            <button class="btn-emoji" onclick="mostrarRazon('Tu apoyo', 'Gracias por estar ahí siempre, agradezco tenerte en mi vida.')">🤝</button>
+            <button class="btn-emoji" onclick="mostrarRazon('Tu forma de ser', 'Eres única en este mundo y solo eso, eres tan especial que sin ti mi mundo se rompe a pedazos.')">✨</button>
+            <button class="btn-emoji" onclick="mostrarRazon('Tu me motivas', 'Siempre me haces sonreír y me das fuerza para seguir adelante.')">😂</button>
+            <button class="btn-emoji" onclick="mostrarRazon('Tu inteligencia', 'Admiro cómo solucionas tus problemas y creo que eres increíble.')">🧠</button>
+            <button class="btn-emoji" onclick="mostrarRazon('Tu amor', 'Es lo que más anhelo en este mundo, tus caricias, el amor que me brindas diario, eres tan jodidamente especial que ya quiero verte para demostrartelo de otras formas...')">💕</button>
+
         </div>
-        <p id="textoRazon" style="font-weight: bold; color: #ff4d6d; margin-top: 15px;"></p>
+        <p id="textoRazon" style="font-weight: bold; color: #ff7f7f; margin-top: 15px; min-height: 40px;"></p>
     </div>
 
-    <!-- TARJETA 3: PLANES -->
+    <!-- 3. PLANES -->
     <div class="card" style="border-style: dotted;">
-        <h2>Nuestros planes ✨</h2>
+        <h2>Nuestros próximos planes ✨</h2>
         <p id="textoFuturo">Haz clic en el dado...</p>
-        <button onclick="generarPlan()" style="font-size: 1.5rem; background: #ffb3c6;">🎲</button>
+        <button onclick="generarPlan()" style="background-color: #ffb3c6; font-size: 1.5rem; max-width: 80px; margin: 0 auto;">🎲</button>
     </div>
 
-    <!-- MÚSICA -->
-    <div id="btnMusicaContainer">
-        <span style="color: #d63384; font-size: 0.8rem; font-weight: bold;">Música -></span>
-        <button id="btnMusica" onclick="toggleMusica()" style="width: 40px; height: 40px; border-radius: 50%; flex: none;">▶</button>
+    <!-- 4. CARTA LARGA -->
+    <div class="card love-letter">
+        <h2 style="text-align: center;">Una cartita para ti... 💌</h2>
+        <p style="white-space: pre-wrap;">Hola mi cielo,
+
+Vanesa, eres la persona que cambió mi mundo. Aunque la distancia nos separe por ahora, cada vez que veo tus fotos o hablamos, siento que estoy justo a tu lado. Gracias por tener la paciencia, por darme tu amor y por permitirme ser yo mismo contigo.
+
+Eres mi sueño hecho realidad y no puedo esperar para que todos esos planes se hagan realidad pronto, jamas dejes que tu mundo se derribe si algien te hace daño, recuerda que yo siempre estaré aquí para apoyarte y amarte incondicionalmente. Eres tan especial para mí que cada detalle que hago es pensando en ti y en lo feliz que me haces, enserio jamas apagues la llama que tienes dentro de ti, eres tan hermosa por dentro y por fuera que no mereces nada más que lo mejor en esta vida, espero que esta página te haga sonreír tanto como tú me haces sonreír a mí cada día.
+
+Te amo con todo mi corazón.</p>
+        <p style="text-align: right; font-weight: bold; color: #d63384;">— Sergio ❤️</p>
     </div>
 
-    <audio id="miMusica" loop>
-        <source src="(Just Like) Starting Over (Ultimate Mix) - John Lennon.mp3" type="audio/mpeg">
-    </audio>
+    <!-- 5. MURO DE RECUERDOS (Para que escuche la canción completa) -->
+    <div class="card">
+        <h2 style="margin-bottom: 5px;">Fotos extras por que si... 📸</h2>
+        <p style="font-size: 0.8rem; margin-bottom: 15px;">(Desliza para verlos todos)</p>
+        <div class="muro-scroll">
+            <img src="ff80f73970b2f7f67e0eb1e882b0bdb8.jpg"> 
+            <img src="ba308af37a2254e8179fb3ee57529be9.jpg">
+            <img src="e3506b5bd98d69d8a9c5e3459dc361f4.jpg">
+            <img src="cd7e0ff099e3e1e377374a9c8cae85fe.jpg">
+            <img src="f4bfcebf0cc7836c87b604ae048b626a.jpg">
+            <img src="b9f2baa118207d7fb123bd5a33adc1c6.jpg">
+            <img src="191ef6dcb626ce93cc651ad4ee0995e7.jpg">
+        </div>
+    </div>
+
+    <p style="text-align: center; color: #d63384; font-weight: bold; margin-bottom: 80px;">
+        Gracias por llegar hasta aquí... <br> Te amo tanto que cada detalle fue hecho con todo mi amor pensando en ti. <br> ¡Espero que te guste esta pagina entra cuando quieras! ❤️
+    </p>
 
     <script>
         const cartas = [
@@ -149,7 +389,7 @@
                 titulo: "Para mi niña hermosa",
                 mensaje: "Quería darte un detalle diferente, algo que pudieras guardar siempre por que no nos podemos ver creo esta manera es la mejor.",
                 foto: "dcb364cda26003eb77348739a2c560d6.jpg",
-                secreto: "¿Curiosa que no? Sabía que tendrías curiosidad... Te amo más de lo que imaginas y he tenido sueños contigo..."
+                secreto: "¿Curiosa que no? Sabía que tendrías curiosidad... Te amo más de lo que imaginas y eh tenido sueños contigo pero sueños personales, unos raros, otros lindos y la verdad solo se que de verdad estoy enamorado de ti."
             },
             {
                 titulo: "Yo te aprecio mucho!",
@@ -159,14 +399,26 @@
             },
             {
                 titulo: "¿Siempre juntos?",
-                mensaje: "Eres mi persona favorita en todo el mundo. Gracias por estar conmigo.",
+                mensaje: "Eres mi persona favorita en todo el mundo. Gracias por estar conmigo, la verdad es que un día nos veremos de nuevo pues no sabes como cuento todos esos meses mi cielo.",
                 foto: "d66030f8e3c3418213a0d3da70685ac9.jpg",
                 secreto: null
             },
             {
-                titulo: "Flores para ti",
-                mensaje: "¡Te amo muchísimo! Eres la persona más especial para mí.",
+                titulo: "Unas flores para ti",
+                mensaje: "¡Te amo muchísimo! Eres la persona más especial para mí y mas importante en mi vida :3",
                 foto: "ff6fb8ae413ef6a221c53d77ad4207db.jpg",
+                secreto: null
+            },
+            {
+                titulo: "YO TE AMO MUCHO.",
+                mensaje: "Trato de averiguar las cosas que te gustan para sorprenderte y hacerte feliz, aunque sea a la distancia. Eres lo más importante para mí.",
+                foto: "4cc5918b753303654aa30161dcff30e5.jpg", 
+                secreto: "Sé que no es lo mismo que estar juntos, pero cada detalle que hago es pensando en ti y en lo feliz que me haces. ¡Gracias por ser tan increíble!"
+            },
+            {
+                titulo: ":3",
+                mensaje: "Yo no digo en vana te amo, solo tú te has ganado mi confianza pura que puedo ser yo mismo contigo, eres tan única Vanesa, ¡haberte encontrado fue lo más lindo!",
+                foto: "888687a019f18ce4e1ce12d74e3c9559.jpg",
                 secreto: null
             }
         ];
@@ -175,10 +427,11 @@
 
         function cambiarCarta(direccion) {
             indiceActual += direccion;
-            document.getElementById('titulo').innerText = cartas[indiceActual].titulo;
-            document.getElementById('mensaje').innerText = cartas[indiceActual].mensaje;
-            document.getElementById('foto').src = cartas[indiceActual].foto;
-            document.getElementById('pista').style.visibility = (cartas[indiceActual].secreto) ? 'visible' : 'hidden';
+            const c = cartas[indiceActual];
+            document.getElementById('titulo').innerText = c.titulo;
+            document.getElementById('mensaje').innerText = c.mensaje;
+            document.getElementById('foto').src = c.foto;
+            document.getElementById('pista').style.display = (c.secreto) ? 'block' : 'none';
             document.getElementById('btnAnt').disabled = (indiceActual === 0);
             document.getElementById('btnSig').disabled = (indiceActual === cartas.length - 1);
         }
@@ -186,6 +439,7 @@
         function revelarSecreto() {
             if (cartas[indiceActual].secreto) {
                 document.getElementById('mensaje').innerHTML = `<b>${cartas[indiceActual].secreto}</b>`;
+                document.getElementById('pista').style.display = 'none';
             }
         }
 
@@ -194,25 +448,25 @@
         }
 
         function generarPlan() {
-            const planes = ["Besarnos y darte cariño :3", "Ver una película juntos", "Darnos un abrazo fuerte", "Cocinar algo juntos", "Estar abrazados con música", "Ir a un lugar que nos guste"];
+        const planes = ["Besarnos y darnos cariño :3", "Ver una película juntos de lo que sea", "Darnos un abrazo fuerte que dure el tiempo que sea necesario", "Cocinar algo juntos :)", "Estar abrazados escuchando música", "salir juntos a citas!"];
             document.getElementById('textoFuturo').innerText = planes[Math.floor(Math.random() * planes.length)];
         }
 
-        var musica = document.getElementById("miMusica");
-        var btn = document.getElementById("btnMusica");
-        musica.volume = 0.5;
-
         function toggleMusica() {
+            var musica = document.getElementById("miMusica");
+            var btnDisco = document.getElementById("disco-animado");
             if (musica.paused) {
                 musica.play();
-                btn.innerHTML = "||";
-                btn.style.background = "#d63384";
+                btnDisco.innerHTML = "||"; 
+                btnDisco.style.animation = "girar 3s linear infinite";
+                btnDisco.style.background = "#d63384";
             } else {
                 musica.pause();
-                btn.innerHTML = "▶";
-                btn.style.background = "#ff4d6d";
+                btnDisco.innerHTML = "▶"; 
+                btnDisco.style.animation = "none";
+                btnDisco.style.background = "#ff4d6d";
             }
         }
     </script>
 </body>
-</html>
+</html> 
