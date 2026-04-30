@@ -56,32 +56,110 @@
         }
         button:disabled { background-color: #ffccd5; cursor: not-allowed; }
         .hint { font-size: 0.8rem; color: #ff8fa3; margin-top: -15px; margin-bottom: 10px; display: none; }
-    </style> <style>
+    </style> <style><style>
     body {
         background-color: #ffeef2;
         display: flex;
-        flex-direction: column; /* Pone las tarjetas una debajo de otra */
+        flex-direction: column;
         align-items: center;
-        justify-content: flex-start; /* Empieza desde arriba para poder bajar */
-        min-height: 100vh; /* Permite que el fondo crezca si hay mucho contenido */
+        justify-content: flex-start;
+        min-height: 100vh;
         margin: 0;
-        padding: 20px 0; /* Espacio para que no pegue a los bordes del celular */
+        padding: 20px 0; /* Espacio arriba y abajo */
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        overflow-x: hidden; /* Evita que la pantalla se mueva hacia los lados */
     }
 
     .card {
         background: white;
-        padding: 30px;
+        padding: 20px; /* Padding reducido para ganar espacio lateral */
         border-radius: 20px;
-        box-shadow: 0 10px 25px rgba(214, 51, 132, 0.2);
+        box-shadow: 0 10px 25px rgba(214, 51, 132, 0.15);
         text-align: center;
-        max-width: 400px;
-        width: 85%; /* Un poco más pequeña para que respire en el celular */
+        width: 92%; /* Ocupa casi todo el ancho del celular */
+        max-width: 450px; /* Pero no se estira de más en tablets */
         border: 3px dashed #ffb3c6;
-        margin-bottom: 20px; /* Separa las tarjetas entre sí */
+        margin-bottom: 25px;
+        box-sizing: border-box; /* Crucial para que el ancho sea exacto */
     }
 
-    /* ... el resto de tus estilos (.photo-container, img, etc.) ... */
+    .photo-container {
+        width: 100%;
+        max-width: 280px; /* Un poco más grande la foto */
+        height: 280px;
+        margin: 0 auto 20px;
+        border-radius: 15px;
+        overflow: hidden;
+        border: 4px solid #ff4d6d;
+        position: relative;
+    }
+
+    .photo-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    h1 {
+        color: #d63384;
+        font-size: 1.6rem; /* Tamaño ideal para celular */
+        margin-bottom: 15px;
+    }
+
+    p {
+        color: #555;
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+
+    .buttons {
+        display: flex;
+        gap: 12px; /* Espacio entre botones */
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    button {
+        flex: 1; /* Hace que los botones midan lo mismo */
+        background-color: #ff4d6d;
+        color: white;
+        border: none;
+        padding: 12px 5px;
+        border-radius: 25px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        font-weight: bold;
+        transition: transform 0.2s, background 0.3s;
+    }
+
+    button:active {
+        transform: scale(0.95); /* Efecto de click en celular */
+        background-color: #d63384;
+    }
+
+    /* Estilo para los botones de las razones (los emojis) */
+    .grid-reasons {
+        display: grid; 
+        grid-template-columns: 1fr 1fr 1fr; 
+        gap: 15px; 
+        margin-top: 15px;
+    }
+
+    .btn-emoji {
+        font-size: 1.5rem;
+        padding: 15px 0;
+        background: #fff0f3;
+        border: 2px solid #ffb3c6;
+        border-radius: 15px;
+    }
+
+    /* Ajuste para el botón flotante de música */
+    #btnMusica {
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+</style>
+   
+
 </style>
 </head>
 <body>
