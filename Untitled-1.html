@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para mi niña hermosa</title>
+    <style>
+        body {
+            background-color: #ffeef2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(214, 51, 132, 0.2);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            border: 3px dashed #ffb3c6;
+        }
+        .photo-container {
+            width: 220px;
+            height: 220px;
+            margin: 0 auto 20px;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 5px solid #ff4d6d;
+            cursor: pointer;
+            position: relative;
+        }
+        .photo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+        .photo-container:active img { transform: scale(0.95); }
+        h1 { color: #d63384; font-size: 1.8rem; margin-bottom: 10px;}
+        p { color: #555; line-height: 1.6; min-height: 80px; font-size: 1.1rem; }
+        .buttons { display: flex; justify-content: space-between; margin-top: 25px; }
+        button {
+            background-color: #ff4d6d;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        button:disabled { background-color: #ffccd5; cursor: not-allowed; }
+        .hint { font-size: 0.8rem; color: #ff8fa3; margin-top: -15px; margin-bottom: 10px; display: none; }
+    </style> <style>
+    body {
+        background-color: #ffeef2;
+        display: flex;
+        flex-direction: column; /* Pone las tarjetas una debajo de otra */
+        align-items: center;
+        justify-content: flex-start; /* Empieza desde arriba para poder bajar */
+        min-height: 100vh; /* Permite que el fondo crezca si hay mucho contenido */
+        margin: 0;
+        padding: 20px 0; /* Espacio para que no pegue a los bordes del celular */
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .card {
+        background: white;
+        padding: 30px;
+        border-radius: 20px;
+        box-shadow: 0 10px 25px rgba(214, 51, 132, 0.2);
+        text-align: center;
+        max-width: 400px;
+        width: 85%; /* Un poco más pequeña para que respire en el celular */
+        border: 3px dashed #ffb3c6;
+        margin-bottom: 20px; /* Separa las tarjetas entre sí */
+    }
+
+    /* ... el resto de tus estilos (.photo-container, img, etc.) ... */
+</style>
+</head>
+<body>
+
+<div class="card">
+    <div class="photo-container" onclick="revelarSecreto()">
+        <img id="foto" src="dcb364cda26003eb77348739a2c560d6.jpg" alt="Foto">
+    </div>
+    <p id="pista" class="hint">✨ Toca la foto ✨</p>
+    <h1 id="titulo">Para mi niña hermosa</h1>
+    <p id="mensaje">Quería darte un detalle diferente, algo que pudieras guardar siempre. Eres increíble.</p>
+    
+    <div class="buttons">
+        <button id="btnAnt" onclick="cambiarCarta(-1)" disabled>Anterior</button>
+        <button id="btnSig" onclick="cambiarCarta(1)">Siguiente</button>
+    </div>
+</div>
+
+<script>
+    const cartas = [
+        {
+            titulo: "Para mi niña hermosa",
+            mensaje: "Quería darte un detalle diferente, algo que pudieras guardar siempre por que no nos podemos ver creo esta manera es la mejor.",
+            foto: "dcb364cda26003eb77348739a2c560d6.jpg",
+            secreto: "¿Curiosa que no? Sabía que tendrías curiosidad... Te amo más de lo que imaginas y eh tenido sueños contigo pero aun no me atrevo a decírtelo. "
+        },
+        {
+            titulo: "Yo te aprecio mucho!",
+            mensaje: "Me encanta estar contigo y disfrutar de cada momento juntos yo te quiero.",
+            foto: "481448fedd5470cf93d9f1590676d863.jpg", //
+            secreto: null
+        },
+        {
+            titulo: "¿Siempre juntos?",
+            mensaje: "Eres mi persona favorita en todo el mundo. Gracias por estar conmigo, la verdad es que un día nos veremos de nuevo.",
+            foto: "d66030f8e3c3418213a0d3da70685ac9.jpg", // 
+            secreto: null
+        },
+        {
+            titulo: "Unas flores para ti por ahora virtuales",
+            mensaje: "¡Te amo muchísimo! Eres la persona más especial para mí y mas importante en mi vida :3 ",
+            foto: "ff6fb8ae413ef6a221c53d77ad4207db.jpg",
+            secreto: null
+        }
+    ];
+
+    let indiceActual = 0;
+
+    function cambiarCarta(direccion) {
+        indiceActual += direccion;
+        
+        // Actualizar contenido
+        document.getElementById('titulo').innerText = cartas[indiceActual].titulo;
+        document.getElementById('mensaje').innerText = cartas[indiceActual].mensaje;
+        document.getElementById('foto').src = cartas[indiceActual].foto;
+        
+        // Mostrar/ocultar pista si hay secreto
+        document.getElementById('pista').style.display = (cartas[indiceActual].secreto) ? 'block' : 'none';
+
+        // Botones
+        document.getElementById('btnAnt').disabled = (indiceActual === 0);
+        document.getElementById('btnSig').disabled = (indiceActual === cartas.length - 1);
+    }
+
+    function revelarSecreto() {
+        if (cartas[indiceActual].secreto) {
+            document.getElementById('mensaje').innerHTML = `<b>${cartas[indiceActual].secreto}</b>`;
+            document.getElementById('pista').style.display = 'none';
+        }
+    }
+
+    // Mostrar pista al inicio
+    document.getElementById('pista').style.display = 'block';
+</script>
+</body
+
+><!-- SECCIÓN DE MÚSICA DE JOHN LENNON -->
+<div style="position: fixed; bottom: 25px; left: 25px; z-index: 1000; display: flex; align-items: center; gap: 10px; background: rgba(255, 255, 255, 0.7); padding: 5px 15px; border-radius: 30px; border: 1px solid #ffb3c6;">
+    <span style="color: #d63384; font-size: 0.9rem; font-weight: bold;">Dale play -></span>
+    <button id="btnMusica" onclick="toggleMusica()" style="width: 45px; height: 45px; border-radius: 50%; border: none; background: #ff4d6d; color: white; cursor: pointer; box-shadow: 0 4px 10px rgba(255, 77, 109, 0.4); font-size: 20px; transition: 0.3s;">
+        ▶
+    </button>
+</div><!-- NUEVO APARTADO: RAZONES POR LAS QUE TE QUIERO -->
+    <div class="card" style="margin-top: 20px; padding: 20px;">
+        <h2 style="color: #d63384; font-size: 1.4rem;">3 cosas que amo de ti...</h2>
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 15px;">
+            <button onclick="mostrarRazon('Tu sonrisa', 'Es lo que más me alegra el día, incluso cuando todo va mal.')" style="padding: 10px; font-size: 1.2rem;">😊</button>
+            <button onclick="mostrarRazon('Tu apoyo', 'Gracias por estar ahí siempre, valoro muchísimo que me escuches.')" style="padding: 10px; font-size: 1.2rem;">🤝</button>
+            <button onclick="mostrarRazon('Tu forma de ser', 'Eres única y no te cambiaría por nada en este mundo.')" style="padding: 10px; font-size: 1.2rem;">✨</button>
+             <button onclick="mostrarRazon('Tu risa', 'Es contagiosa y me hace sentir feliz cada vez que la escucho.')" style="padding: 10px; font-size: 1.2rem;">😂</button>
+              <button onclick="mostrarRazon('Tu inteligencia', 'Admiro lo inteligente que eres y cómo siempre encuentras soluciones a todo.')" style="padding: 10px; font-size: 1.2rem;">🧠</button>
+               <button onclick="mostrarRazon('Tu inteligencia', 'Admiro lo inteligente que eres y cómo siempre encuentras soluciones a todo.')" style="padding: 10px; font-size: 1.2rem;"></button>
+                
+        </div>
+        <p id="textoRazon" style="font-size: 1rem; color: #ff4d6d; margin-top: 15px; font-weight: bold; min-height: 50px;"></p>
+    </div>
+
+</body><!-- TERCERA TARJETA: PLANES A FUTURO -->
+    <div class="card" style="margin-top: 20px; padding: 25px; border-style: dotted;">
+        <h2 style="color: #d63384; font-size: 1.4rem;">Nuestros próximos planes ✨</h2>
+        <p id="textoFuturo" style="font-style: italic; color: #777;">Haz clic en el dado para ver un plan juntos...</p>
+        <button onclick="generarPlan()" style="background-color: #ffb3c6; border-radius: 15px; padding: 10px 20px; font-size: 1.5rem;">🎲</button>
+    </div>
+ <!-- El body debe cerrar DESPUÉS de las tarjetas -->
+
+<!-- SECCIÓN DE MÚSICA DE JOHN LENNON -->
+<div style="position: fixed; bottom: 25px; left: 25px; z-index: 1000; display: flex; align-items: center; gap: 10px; background: rgba(255, 255, 255, 0.7); padding: 5px 15px; border-radius: 30px; border: 1px solid #ffb3c6;">
+    <span style="color: #d63384; font-size: 0.9rem; font-weight: bold;">Dale play -></span>
+    <button id="btnMusica" onclick="toggleMusica()" style="width: 45px; height: 45px; border-radius: 50%; border: none; background: #ff4d6d; color: white; cursor: pointer; box-shadow: 0 4px 10px rgba(255, 77, 109, 0.4); font-size: 20px; transition: 0.3s;">
+        ▶
+    </button>
+</div>
+
+<audio id="miMusica" loop>
+    <source src="(Just Like) Starting Over (Ultimate Mix) - John Lennon.mp3" type="audio/mpeg">
+    Tu navegador no soporta la música.
+</audio>
+
+<script>
+    // Script para las razones
+    function mostrarRazon(titulo, detalle) {
+        const campo = document.getElementById('textoRazon');
+        campo.innerHTML = `<span style="color:#d63384">${titulo}:</span> ${detalle}`;
+    }
+
+    // Script para la música
+    var musica = document.getElementById("miMusica");
+    var btn = document.getElementById("btnMusica");
+    musica.volume = 0.5; 
+
+    function toggleMusica() {
+        if (musica.paused) {
+            musica.play();
+            btn.innerHTML = "||"; 
+            btn.style.background = "#d63384";
+        } else {
+            musica.pause();
+            btn.innerHTML = "▶"; 
+            btn.style.background = "#ff4d6d";
+        }
+    }
+</script> <script>
+    // ... aquí van tus otras funciones (cambiarCarta, revelarSecreto, mostrarRazon, etc.)
+
+    function generarPlan() {
+        const planes = [
+            "Ir por unos helados y caminar sin rumbo. 🍦",
+            "Ver una maratón de películas hasta tarde. 🍿",
+            "Un picnic en un parque cuando por fin nos veamos. 🧺",
+            "Cocinar algo juntos (aunque se nos queme). 🍳",
+            "Simplemente estar abrazados escuchando música. 🫂",
+            "Ir a un arcade y ganarte en todos los juegos. 🕹️"
+        ];
+        const randomPlan = planes[Math.floor(Math.random() * planes.length)];
+        document.getElementById('textoFuturo').innerText = randomPlan;
+    }
+</script> <!-- ESTA ETIQUETA DEBE IR HASTA EL FINAL -->
+</html>
+
+<audio id="miMusica" loop>
+    <source src="(Just Like) Starting Over (Ultimate Mix) - John Lennon.mp3" type="audio/mpeg">
+    Tu navegador no soporta la música.
+</audio>
+
+<script>
+    var musica = document.getElementById("miMusica");
+    var btn = document.getElementById("btnMusica");
+
+    // Ajustamos el volumen para que sea romántico y no asuste
+    musica.volume = 0.5; 
+
+    function toggleMusica() {
+        if (musica.paused) {
+            musica.play();
+            btn.innerHTML = "||"; // Icono de pausa
+            btn.style.background = "#d63384";
+        } else {
+            musica.pause();
+            btn.innerHTML = "▶"; // Icono de play
+            btn.style.background = "#ff4d6d";
+        }
+    }
+</script>
+</html>
